@@ -1,0 +1,44 @@
+{% extends "ecommerce/base.html" %}
+
+{% block title %}MeusPedidos{% endblock %}
+
+{% block content %}
+<h1>Meus Pedidos:</h1>
+
+{% for pedido in pedidos %}
+        <h2>Pedido N {{pedido.id}}</h2>
+        <h3 class="col-md-2">Data: </h3> 
+        <h4 class="col-md-2"> {{pedido.data}}</h4>
+        <h3 class="col-md-2">Status: </h3>
+        <h4 class="col-md-2">{{pedido.status}}</h4>
+        <h4 class="col-md-4">Total:: {{ pedido.carrinho.precoTotal }}</h4>
+        <br><br>
+
+        <h2>Itens do seu pedido:</h2>
+        {% for item in pedido.carrinho.itens.all %}
+        <div class="container">
+          <div class="col-md-8">
+                <h5>
+                Produto: {{ item.produto.nome }}  
+                ------------ 
+                Qtd: {{ item.quantidade }}
+                <p align="right">
+                {{ item.produto.preco }}
+                </p>
+            </h5>
+          </div>
+        </div>
+        {% endfor %}
+{% endfor %}
+
+<div class="jumbotron">    
+    <form action="/ecommerce/home/" method="post">
+                {% csrf_token %}               
+                <input type="hidden" name="us_id" value={{ usuario.id }}>
+                <input type="submit" value="Voltar a tela Inicial">
+    </form>
+</div>
+
+
+
+{% endblock %}

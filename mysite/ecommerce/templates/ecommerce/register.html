@@ -1,0 +1,35 @@
+{% extends "ecommerce/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<div align="center">
+<h1>Prencha os Campos:</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="newRegister" value={{ True }}>
+    <h2>Nome:</h2><br>
+    <input type="text" name="usuario_nome">
+    <h2>Email:</h2>
+    <input type="text" name="usuario_email">  
+    <h2>Senha:</h2>
+    <input type="text" name="usuario_senha">
+    <h2>Cpf:</h2>
+    <input type="text" name="usuario_cpf">
+    <h2>Endereco:</h2>
+    <input type="text" name="usuario_endereco">
+    <br>
+    <input type="submit" value="Cadastrar">
+  </form>
+  <br><br>
+  <div class="jumbotron">
+  <form action="/ecommerce/" method="">
+    <input type="submit" value="Voltar">
+  </form>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "ecommerce/base.html" %}
+
+{% block title %}RegisterSucess{% endblock %}
+
+{% block content %}
+
+<div align="center">
+<h1>Cadastrado com Exito!!!</h1>
+  <form action="/ecommerce/" method="">
+    {% csrf_token %}
+    <input type="submit" value="Voltar ao Log In">
+  </form>
+</div>
+
+
+
+{% endblock %}

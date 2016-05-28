@@ -1,0 +1,43 @@
+{% extends "ecommerce/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div align="center">
+    <h1>Faça seu Login:</h1>
+    <form action="" method="post">
+      {% csrf_token %}
+      <h2>Nome:</h2><br>
+      <input type="text" name="usuario_nome">
+      <h2>Senha:</h2>
+      <input type="text" name="usuario_senha">
+      <input type="submit" value="Entrar">
+    </form>
+</div>
+
+<div>
+    {% if usuario%}
+    <h3>Nao ha usuario com Nome {{usuario}} cadastrado no sistema</h3>    
+      {% if senha%}
+      <h3>Sua Senha nao bate com o nome de usuario</h3>
+      {% endif %}
+    {% endif %}
+    <br><br><br>
+    <h4>Obs: tente José e 12345</h4>
+</div>
+
+<div class="jumbotron">
+    <div class= "col-md-1">
+    <h2>Ou... </h2>
+    </div>
+    <div class= "col-md-1" align="left">
+    <form action="register/" method="post">
+        {% csrf_token %}
+      <input type="submit" value="Cadastre-se Aqui">
+    </form>
+    </div>
+</div>
+
+
+{% endblock %}

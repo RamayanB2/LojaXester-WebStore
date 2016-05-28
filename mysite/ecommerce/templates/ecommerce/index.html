@@ -1,0 +1,63 @@
+{% extends "ecommerce/base.html" %}
+
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h3 class="col-md-10">Bem vindo(a),.... {{usuario.nome}}</h3>
+
+    <div class="col-md-1">
+        <form action="/ecommerce/home/pedidos/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="us_id" value={{ usuario.id }}>
+            <input type="submit" value="Meus Pedidos">
+        </form>
+    </div>
+
+    <div class="col-md-1">
+        <form action="/ecommerce/" method="">
+            {% csrf_token %}
+            <input type="submit" value="Log Out">
+        </form>
+    </div>
+</div>
+
+<h2>Busca por produtos</h2>
+
+<form action="/ecommerce/home/" method="post">
+  {% csrf_token %}
+  Busca:<br>
+  <input type="hidden" name="us_id" value={{ usuario.id }}>
+  <input type="text" name="search_tag">
+  <input type="submit" value="Ok">
+</form>
+
+
+<h1>Produtos da Loja:</h1>
+
+<table width="100%">
+    <tr>
+    {% for p in produtos %}
+        <td>            
+            <form action="/ecommerce/home/carrinho/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="produto_id" value={{ p.id }}>                
+                <input type="hidden" name="us_id" value={{ usuario.id }}>
+                <input type="submit" value="Adicionar ao carrinho">
+            </form>
+
+            {{ p.nome }}<br>
+            {{ p.preco }}<br>
+            <img src="/media/{{ p.photo }}" height="200" width="200"><br>
+            {{p.desc}}
+            <p>Qtd em Estoque:{{p.qtdEst}}</p>
+
+        {% if forloop.counter|divisibleby:5 %}
+            </tr>
+            <tr>
+        {% endif %}
+    {% endfor %}
+    </tr>
+</table>
+
+{% endblock %}
